@@ -1,0 +1,52 @@
+sfmrabbit:
+    image: rabbitmq:3-management
+    ports:
+        - "15672:15672"
+    restart: always
+    environment:
+        - RABBITMQ_DEFAULT_USER=sfm_user
+        - RABBITMQ_DEFAULT_PASS=password
+sfmuidb:
+    image: gwul/sfm-ui-db:master
+    environment:
+        - POSTGRES_PASSWORD=gherD42#dl5
+    restart: always
+sfmuiapp:
+    image: gwul/sfm-ui:master
+    ports:
+        - "8080:80"
+    links:
+        - sfmuidb:db
+        - sfmrabbit:mq
+    environment:
+        - SFM_DEBUG=True
+        - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
+    restart: always
+    # WARCs are currently written to /tmp/collection.
+    # This will need to be changed once https://github.com/gwu-libraries/sfm-ui/issues/126 is done.
+    volumes:
+        - /tmp/collection
+sfmtwitterrestharvester:
+    image: gwul/sfm-twitter-rest-harvester:master
+    links:
+        - sfmrabbit:mq
+    restart: always
+    volumes_from:
+        - sfmuiapp:rw
+    environment:
+        - DEBUG=False
+sfmelk:
+  build: dev
+  ports:
+    #Kibana web interface
+    - "5601:5601"
+    #Elasticsearch JSON interface
+    - "9200:9200"
+    #Logstash server
+    - "5000:5000"
+  volumes:
+    - "..:/opt/sfm-elk"
+  links:
+    - sfmrabbit:mq
+  volumes_from:
+    - sfmuiapp:ro

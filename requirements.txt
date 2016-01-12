@@ -1,0 +1,4 @@
+git+https://github.com/gwu-libraries/sfm-utils.git@master#egg=sfmutils
+git+https://github.com/gwu-libraries/sfm-twitter-harvester.git@master#egg=sfmtwitterharvester
+librabbitmq==1.6.1
+requests==2.9.1
