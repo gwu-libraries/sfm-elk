@@ -11,10 +11,13 @@ resp = requests.post("http://localhost:9200/.kibana/index-pattern/logstash-*", d
 resp.raise_for_status()
 
 print "Loading config"
-resp = requests.get("http://localhost:9200/.kibana/_search?type=config")
-resp.raise_for_status()
+hits = 0
+while hits != 1:
+    resp = requests.get("http://localhost:9200/.kibana/_search?type=config")
+    resp.raise_for_status()
+    hits = resp.json()["hits"]["total"]
 config = resp.json()["hits"]["hits"][0]["_source"]
-config["default"] = "logstash-*"
+config["defaultIndex"] = "logstash-*"
 resp = requests.put("http://localhost:9200/.kibana/config/{}".format(resp.json()["hits"]["hits"][0]["_id"]), data=json.dumps(config))
 resp.raise_for_status()
 
