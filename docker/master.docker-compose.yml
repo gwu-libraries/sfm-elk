@@ -22,10 +22,8 @@ sfmuiapp:
         - SFM_DEBUG=True
         - SFM_SITE_ADMIN_EMAIL=nowhere@example.com
     restart: always
-    # WARCs are currently written to /tmp/collection.
-    # This will need to be changed once https://github.com/gwu-libraries/sfm-ui/issues/126 is done.
     volumes:
-        - /tmp/collection
+        - /sfm-data
 sfmtwitterrestharvester:
     image: gwul/sfm-twitter-rest-harvester:master
     links:
