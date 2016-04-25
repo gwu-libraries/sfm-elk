@@ -1,5 +1,5 @@
 # sfm-elk
-A proof-of-concept analytics dashboard for social media content harvested by [Social Feed Manager](https://github.com/gwu-libraries/sfm-ui) using the ELK
+A proof-of-concept analytics dashboard for social media content harvested by [Social Feed Manager](https://gwu-libraries.github.io/sfm-ui) using the ELK
 ([Elasticsearch](https://www.elastic.co/products/elasticsearch), [Logstash](https://www.elastic.co/products/logstash), 
 [Kibana](https://www.elastic.co/products/kibana)) stack.
 
