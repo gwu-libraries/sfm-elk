@@ -15,7 +15,7 @@ RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && m
 RUN pip install --upgrade pip
 #This pre-fetches the most recent requirements.txt.
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-elk/master/requirements/common.txt /tmp/
-ADD https://raw.githubusercontent.com/gwu-libraries/sfm-elk/master/requirements/requirements.txt /tmp/
+ADD https://raw.githubusercontent.com/gwu-libraries/sfm-elk/master/requirements/dev.txt /tmp/
 RUN pip install -r /tmp/requirements.txt
 RUN pip install appdeps
 ADD start.sh /usr/local/bin/sfm_elk_start.sh
