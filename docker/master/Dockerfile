@@ -17,7 +17,7 @@ RUN wget --no-check-certificate https://github.com/gwu-libraries/sfm-elk/archive
 RUN unzip master.zip
 RUN mv sfm-twitter-harvester-master /opt/sfm-elk
 WORKDIR /opt/sfm-elk
-RUN pip install -r /tmp/requirements.txt
+RUN pip install -r requirements/master.txt
 RUN pip install appdeps
 ADD start.sh /usr/local/bin/sfm_elk_start.sh
 RUN chmod +x /usr/local/bin/sfm_elk_start.sh

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pip install -r /opt/sfm-elk/requirements.txt --upgrade
+pip install -r /opt/sfm-elk/dev.txt --upgrade
 
 /usr/local/bin/start.sh &
 
