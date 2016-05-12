@@ -21,4 +21,4 @@ RUN pip install -r requirements/master.txt
 RUN pip install appdeps
 ADD start.sh /usr/local/bin/sfm_elk_start.sh
 RUN chmod +x /usr/local/bin/sfm_elk_start.sh
-CMD /usr/local/bin/sfm_elk_start.sh
+ENTRYPOINT ["/usr/local/bin/sfm_elk_start.sh"]

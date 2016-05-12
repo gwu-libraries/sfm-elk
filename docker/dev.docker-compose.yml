@@ -48,3 +48,7 @@ sfmelk:
     - sfmrabbit:mq
   volumes_from:
     - sfmuiapp:ro
+  environment:
+    - DEBUG=True
+  #You can get the collection id from the collection detail page in SFM UI.
+  #command: --collection=04afb3d938aa468ca2a71de0824da126xxxxxx

@@ -21,4 +21,4 @@ RUN pip install appdeps
 ADD start.sh /usr/local/bin/sfm_elk_start.sh
 RUN chmod +x /usr/local/bin/sfm_elk_start.sh
 WORKDIR /opt/sfm-elk
-CMD /usr/local/bin/sfm_elk_start.sh
+ENTRYPOINT ["/usr/local/bin/sfm_elk_start.sh"]
