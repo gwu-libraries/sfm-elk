@@ -7,7 +7,8 @@ RUN apt-get update && apt-get install -y \
     libssl-dev \
     python-pip \
     git \
-    wget
+    wget \
+    zip
 #Need newer version of jq
 WORKDIR /usr/bin
 RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 jq && chmod +x jq
