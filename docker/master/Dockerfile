@@ -16,7 +16,7 @@ RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && m
 RUN pip install --upgrade pip
 RUN wget --no-check-certificate https://github.com/gwu-libraries/sfm-elk/archive/master.zip
 RUN unzip master.zip
-RUN mv sfm-twitter-harvester-master /opt/sfm-elk
+RUN mv sfm-elk-master /opt/sfm-elk
 WORKDIR /opt/sfm-elk
 RUN pip install -r requirements/master.txt
 RUN pip install appdeps
