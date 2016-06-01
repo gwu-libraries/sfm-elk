@@ -6,6 +6,6 @@ appdeps.py --port-wait mq:5672 --port-wait localhost:9200 --port-wait localhost:
 
 python elk_config_loader.py
 
-python sfm_elk_loader.py mq $MQ_ENV_RABBITMQ_DEFAULT_USER $MQ_ENV_RABBITMQ_DEFAULT_PASS $COLLECTION_ID --debug=$DEBUG $* &
+python sfm_elk_loader.py mq $MQ_ENV_RABBITMQ_DEFAULT_USER $MQ_ENV_RABBITMQ_DEFAULT_PASS elk_loader_$HOSTNAME --debug=$DEBUG $* &
 
 wait
