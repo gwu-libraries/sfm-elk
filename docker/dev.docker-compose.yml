@@ -33,6 +33,15 @@ sfmtwitterrestharvester:
         - sfmuiapp:rw
     environment:
         - DEBUG=False
+sfmweiboharvester:
+    image: gwul/sfm-weibo-harvester:master
+    links:
+        - sfmrabbit:mq
+    restart: always
+    volumes_from:
+        - sfmuiapp:rw
+    environment:
+        - DEBUG=False
 sfmelk:
   build: dev
   ports:

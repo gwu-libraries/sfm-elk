@@ -1,3 +1,4 @@
-#-r common.txt
+-r common.txt
 -e ../sfm-utils
 -e ../sfm-twitter-harvester
+-e ../sfm-weibo-harvester
