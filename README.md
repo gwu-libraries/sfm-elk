@@ -11,12 +11,13 @@ outputting line-oriented json records to STDOUT.
 3. Pipes the filtered json records to Logstash.
 4. Logstash loads the json records to Elasticsearch, which makes them available from Kibana.
 
-sfm-elk currently only supports loading WARCs from the Twitter REST and Stream APIs and only provides a Twitter dashboard.
+sfm-elk currently supports loading WARCs from the Twitter REST API, Twitter Stream API, and Weibo API. A Twitter dashboard
+and Weibo dashboard are provided.
 
 ## Installing
     git clone https://github.com/gwu-libraries/sfm-elk.git
     cd sfm-elk
-    pip install -r requirements.txt
+    pip install -r requirements/requirements.txt
 
 ## Requirements
 [Docker Engine](https://www.docker.com/docker-engine) and [Docker Compose](https://www.docker.com/docker-compose)
