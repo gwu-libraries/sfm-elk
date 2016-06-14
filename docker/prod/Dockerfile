@@ -1,7 +1,7 @@
 FROM sebp/elk
 MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
-ENV sfm_elk_version 0.0.0
+ENV sfm_elk_version 1.0.0
 RUN apt-get update && apt-get install -y \
     python-dev \
     libffi-dev \
