@@ -3,6 +3,12 @@ import requests
 
 # For kibana's configuration: http://192.168.99.100:9200/.kibana/_search?pretty=1
 
+with open("twitter_hashtags.json") as fields_file:
+    hashtags = json.load(fields_file)
+print "Setting hashtags template"
+resp_status = requests.post("http://localhost:9200/_template/twitter_hashtags", data=json.dumps(hashtags))
+resp_status.raise_for_status()
+
 with open("fields.json") as fields_file:
     fields = json.load(fields_file)
 
@@ -28,3 +34,5 @@ for export in exports:
     print "Loading {} ({})".format(export["_id"], export["_type"])
     resp = requests.post("http://localhost:9200/.kibana/{}/{}".format(export["_type"], export["_id"]), data=json.dumps(export["_source"]))
     resp.raise_for_status()
+
+
