@@ -1,5 +1,6 @@
 sfmrabbit:
-    image: rabbitmq:3-management
+    image: rabbitmq@sha256:a5180a37b0baebb938ee9d12dd11eed64a909288d7f344e24771278f8a122367
+    #image: rabbitmq:3-management
     ports:
         - "15672:15672"
     restart: always
