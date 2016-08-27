@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pip install -r /opt/sfm-elk/requirements/dev.txt --upgrade
+/opt/sfm-setup/setup_reqs.sh
 
 echo logging.quiet: true >> /opt/kibana/config/kibana.yml
 
@@ -19,6 +19,6 @@ fi
 
 python elk_config_loader.py
 
-python sfm_elk_loader.py mq $MQ_ENV_RABBITMQ_DEFAULT_USER $MQ_ENV_RABBITMQ_DEFAULT_PASS elk_loader_$HOSTNAME --debug=$DEBUG $* &
+python sfm_elk_loader.py mq $RABBITMQ_USER $RABBITMQ_PASSWORD elk_loader_$HOSTNAME --debug=$DEBUG $* &
 
 wait

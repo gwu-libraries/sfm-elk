@@ -1,4 +1,3 @@
--r common.txt
 git+https://github.com/gwu-libraries/sfm-utils.git@master#egg=sfmutils
 git+https://github.com/gwu-libraries/sfm-twitter-harvester.git@master#egg=sfmtwitterharvester
 git+https://github.com/gwu-libraries/sfm-weibo-harvester.git@master#egg=sfmweiboharvester
