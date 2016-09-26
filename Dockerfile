@@ -23,6 +23,7 @@ RUN pip install appdeps
 ENV SFM_REQS release
 ENV DEBUG false
 ADD https://raw.githubusercontent.com/gwu-libraries/sfm-utils/master/docker/base/setup_reqs.sh /opt/sfm-setup/
+RUN chmod +x /opt/sfm-setup/setup_reqs.sh
 ADD docker/start.sh /usr/local/bin/sfm_elk_start.sh
 RUN chmod +x /usr/local/bin/sfm_elk_start.sh
 
