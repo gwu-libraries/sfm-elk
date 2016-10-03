@@ -12,11 +12,8 @@ RUN apt-get update && apt-get install -y \
 #Need newer version of jq
 WORKDIR /usr/bin
 RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 jq && chmod +x jq
-#pip set in 7.1.2
 # Easy installing pip since there is a problem with the pip version currently available from apt.
 RUN easy_install pip==7.1.2
-#RUN pip install pip==7.1.2
-#RUN pip install --upgrade pip
 #Avoid the warning of https
 RUN pip install --upgrade ndg-httpsclient
 RUN pip install appdeps
@@ -26,6 +23,11 @@ ADD https://raw.githubusercontent.com/gwu-libraries/sfm-utils/master/docker/base
 RUN chmod +x /opt/sfm-setup/setup_reqs.sh
 ADD docker/start.sh /usr/local/bin/sfm_elk_start.sh
 RUN chmod +x /usr/local/bin/sfm_elk_start.sh
+
+# More aggressive log-rotating
+ADD docker/elasticsearch-logrotate /etc/logrotate.d/elasticsearch
+RUN chmod 644 /etc/logrotate.d/elasticsearch
+RUN mv /etc/cron.daily/logrotate /etc/cron.hourly/
 
 ADD . /opt/sfm-elk/
 WORKDIR /opt/sfm-elk

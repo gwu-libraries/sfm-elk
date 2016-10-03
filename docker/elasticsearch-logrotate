@@ -1,0 +1,10 @@
+/var/log/elasticsearch/*.log {
+    maxsize 75M
+    daily
+    rotate 7
+    copytruncate
+    compress
+    delaycompress
+    missingok
+    notifempty
+}
