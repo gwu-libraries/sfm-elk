@@ -2,11 +2,13 @@
 
 /opt/sfm-setup/setup_reqs.sh
 
-echo logging.quiet: true >> /opt/kibana/config/kibana.yml
-
-mkdir -p /sfm-data/elk/$HOSTNAME/data
-chown elasticsearch /sfm-data/elk/$HOSTNAME/data
-echo path.data: /sfm-data/elk/$HOSTNAME/data >> /etc/elasticsearch/elasticsearch.yml
+if [ ! -d "/sfm-data/elk/$HOSTNAME/data" ]; then
+    # This will only run once.
+    echo logging.quiet: true >> /opt/kibana/config/kibana.yml
+    mkdir -p /sfm-data/elk/$HOSTNAME/data
+    chown elasticsearch /sfm-data/elk/$HOSTNAME/data
+    echo path.data: /sfm-data/elk/$HOSTNAME/data >> /etc/elasticsearch/elasticsearch.yml
+fi
 
 /usr/local/bin/start.sh &
 
