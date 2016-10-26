@@ -1,0 +1,34 @@
+{
+  "template": "logstash-*",
+  "order": 1,
+  "settings": {
+    "index": {
+      "analysis": {
+        "analyzer": {
+          "analyzer_keyword": {
+            "tokenizer": "keyword",
+            "filter": "uppercase"
+          }
+        }
+      }
+    }
+  },
+  "mappings": {
+    "twitter": {
+      "properties": {
+        "hashtags": {
+          "type": "string",
+          "index" : "analyzed",
+          "analyzer": "analyzer_keyword",
+          "fields" : {
+             "raw" : {
+                 "index" : "not_analyzed",
+                 "type" : "string"
+             }
+          }
+        }
+      }
+    },
+    "aliases": {}
+  }
+}
