@@ -66,8 +66,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Logging
-    logging.basicConfig(format='%(asctime)s: %(name)s --> %(message)s',
-                        level=logging.DEBUG if args.debug else logging.INFO)
+    logging.getLogger().setLevel(logging.DEBUG if args.debug else logging.INFO)
 
     # Adding a queue name that is prefixed with this host. This will allow sending messages directly
     # to this queue. This approach could be generalized so that the queue specific binding is created
