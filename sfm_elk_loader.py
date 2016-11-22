@@ -19,7 +19,7 @@ class ElkLoader(BaseConsumer):
         # Message should be WARC created
         warc_filepath = self.message["warc"]["path"]
         if self.collection_set_id and self.collection_set_id != self.message["collection_set"]["id"]:
-            log.info("Skipping %s since do not loading this collection set", warc_filepath)
+            log.info("Skipping %s because it is from a different collection set", warc_filepath)
             return
 
         harvest_type = self.message["harvest"]["type"]
@@ -37,7 +37,7 @@ class ElkLoader(BaseConsumer):
             jq_cmd = "jq -c '{ sm_type: \"weibo\", id: .mid, user_id: .user.idstr, " \
                      "screen_name: .user.screen_name, created_at: .created_at, text: .text}'"
         else:
-            log.info("Skipping %s since do not handle %s", warc_filepath, harvest_type)
+            log.info("Skipping %s because there is not yet a warc iterator for harvest type %s", warc_filepath, harvest_type)
             return
         log.info("Loading %s", warc_filepath)
         cmd = "{} {} | {} | /opt/logstash/bin/logstash -f stdin.conf".format(iter_type, warc_filepath, jq_cmd)
