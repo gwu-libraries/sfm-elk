@@ -1,4 +1,5 @@
-FROM sebp/elk
+FROM sebp/elk@sha256:64537ae25ba45f9cfbf37928afde0478651cbc8cbf5669607ed74315b6fb81f7
+# es241_l240_k461
 MAINTAINER Justin Littman <justinlittman@gwu.edu>
 
 ARG DEBIAN_FRONTEND=noninteractive
