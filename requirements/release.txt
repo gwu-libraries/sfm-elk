@@ -1,3 +1,3 @@
-git+https://github.com/gwu-libraries/sfm-utils.git@1.4.2#egg=sfmutils
-git+https://github.com/gwu-libraries/sfm-twitter-harvester.git@1.4.2#egg=sfmtwitterharvester
-git+https://github.com/gwu-libraries/sfm-weibo-harvester.git@1.4.2#egg=sfmweiboharvester
+git+https://github.com/gwu-libraries/sfm-utils.git@1.4.3#egg=sfmutils
+git+https://github.com/gwu-libraries/sfm-twitter-harvester.git@1.4.3#egg=sfmtwitterharvester
+git+https://github.com/gwu-libraries/sfm-weibo-harvester.git@1.4.3#egg=sfmweiboharvester
