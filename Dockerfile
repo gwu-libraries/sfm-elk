@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
 WORKDIR /usr/bin
 RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 jq && chmod +x jq
 # Easy installing pip since there is a problem with the pip version currently available from apt.
-RUN easy_install pip==7.1.2
+RUN easy_install pip==9.0.1
 #Avoid the warning of https
 RUN pip install --upgrade ndg-httpsclient
 RUN pip install appdeps
