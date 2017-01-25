@@ -4,12 +4,21 @@
 
 if [ ! -d "/sfm-data/elk/$HOSTNAME/data" ]; then
     # This will only run once.
-    echo logging.quiet: true >> /opt/kibana/config/kibana.yml
+    echo "Creating elasticsearch data directory"
     mkdir -p /sfm-data/elk/$HOSTNAME/data
     chown elasticsearch /sfm-data/elk/$HOSTNAME/data
 fi
 
-echo path.data: /sfm-data/elk/$HOSTNAME/data >> /etc/elasticsearch/elasticsearch.yml
+if ! grep -Fqx "logging.quiet: true" /opt/kibana/config/kibana.yml ; then
+    echo "Adding logging.quiet to kibana.yml"
+    echo logging.quiet: true >> /opt/kibana/config/kibana.yml
+fi
+
+
+if ! grep -Fqx "path.data: /sfm-data/elk/$HOSTNAME/data" /etc/elasticsearch/elasticsearch.yml ; then
+    echo "Adding path.data to elasticsearch.yml"
+    echo path.data: /sfm-data/elk/$HOSTNAME/data >> /etc/elasticsearch/elasticsearch.yml
+fi
 
 /usr/local/bin/start.sh &
 
