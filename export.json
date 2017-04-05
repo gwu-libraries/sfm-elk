@@ -6,7 +6,7 @@
       "title": "Twitter",
       "hits": 0,
       "description": "",
-      "panelsJSON": "[{\"id\":\"Top-10-hashtags\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":4},{\"id\":\"Top-10-tweeters\",\"type\":\"visualization\",\"panelIndex\":2,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":7},{\"id\":\"Top-10-urls\",\"type\":\"visualization\",\"panelIndex\":3,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":4},{\"id\":\"Top-10-user-mentions\",\"type\":\"visualization\",\"panelIndex\":4,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":7},{\"id\":\"Tweet-rate\",\"type\":\"visualization\",\"panelIndex\":5,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"Tweet-list\",\"type\":\"search\",\"panelIndex\":6,\"size_x\":8,\"size_y\":3,\"col\":5,\"row\":1,\"columns\":[\"screen_name\",\"text\"],\"sort\":[\"@timestamp\",\"desc\"]}]",
+      "panelsJSON": "[{\"id\":\"Top-10-hashtags\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":4},{\"id\":\"Top-10-tweeters\",\"type\":\"visualization\",\"panelIndex\":2,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":7},{\"id\":\"Top-10-urls\",\"type\":\"visualization\",\"panelIndex\":3,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":4},{\"id\":\"Top-10-user-mentions\",\"type\":\"visualization\",\"panelIndex\":4,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":7},{\"id\":\"Tweet-rate\",\"type\":\"visualization\",\"panelIndex\":5,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"Tweet-list\",\"type\":\"search\",\"panelIndex\":6,\"size_x\":8,\"size_y\":3,\"col\":5,\"row\":1,\"columns\":[\"screen_name\",\"text\"],\"sort\":[\"@timestamp\",\"desc\"]},{\"id\":\"Top-10-hashtags-cloud\",\"type\":\"visualization\",\"panelIndex\":7,\"size_x\":4,\"size_y\":5,\"col\":1,\"row\":10}]",
       "optionsJSON": "{\"darkTheme\":false}",
       "uiStateJSON": "{}",
       "version": 1,
@@ -31,7 +31,7 @@
       "title": "Tweet list",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\": \"logstash-*\",\"query\": {\"query_string\": {\"analyze_wildcard\": true,\"query\": \"*\"}},\"filter\": [{\"meta\": {\"negate\": false,\"index\": \"logstash-*\",\"key\": \"_type\",\"value\": \"tweet\",\"disabled\": false,\"alias\": null},\"query\": {\"match\": {\"_type\": {\"query\": \"tweet\",\"type\": \"phrase\"}}},\"$state\": {\"store\": \"appState\"}}],\"highlight\": {\"pre_tags\": [\"@kibana-highlighted-field@\"],\"post_tags\": [\"@/kibana-highlighted-field@\"],\"fields\": {\"*\": {}},\"require_field_match\": false,\"fragment_size\": 2147483647}}"
+        "searchSourceJSON": "{\"index\": \"logstash-*\",\"query\": {\"query_string\": {\"analyze_wildcard\": true,\"query\": \"*\"}},\"filter\": [{\"meta\": {\"negate\": false,\"index\": \"logstash-*\",\"key\": \"_type\",\"value\": \"tweet\",\"disabled\": false,\"alias\": null},\"query\": {\"match_phrase\": {\"_type\": {\"query\": \"tweet\"}}},\"$state\": {\"store\": \"appState\"}}],\"highlight\": {\"pre_tags\": [\"@kibana-highlighted-field@\"],\"post_tags\": [\"@/kibana-highlighted-field@\"],\"fields\": {\"*\": {}},\"require_field_match\": false,\"fragment_size\": 2147483647}}"
       },
       "columns": [
         "screen_name",
@@ -43,7 +43,7 @@
     "_id": "Top-10-urls",
     "_type": "visualization",
     "_source": {
-      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"urls.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"urls.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "description": "",
       "title": "Top 10 urls",
       "uiStateJSON": "{}",
@@ -58,7 +58,7 @@
     "_id": "Top-10-tweeters",
     "_type": "visualization",
     "_source": {
-      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"screen_name.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"screen_name.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "description": "",
       "title": "Top 10 tweeters",
       "uiStateJSON": "{}",
@@ -88,9 +88,24 @@
     "_id": "Top-10-hashtags",
     "_type": "visualization",
     "_source": {
-      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"hashtags\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"hashtags.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "description": "",
       "title": "Top 10 hashtags",
+      "uiStateJSON": "{}",
+      "savedSearchId": "Tweet-list",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\": []}"
+      }
+    }
+  },
+  {
+    "_id": "Top-10-hashtags-cloud",
+    "_type": "visualization",
+    "_source": {
+      "visState": "{\"type\":\"tagcloud\",\"params\":{\"scale\":\"log\",\"orientation\":\"multiple\",\"minFontSize\":16,\"maxFontSize\": 60},\"aggs\":[{\"id\":\"1\",\"enabled\": true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\": true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"hashtags.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "title": "Top 10 hashtags cloud",
       "uiStateJSON": "{}",
       "savedSearchId": "Tweet-list",
       "version": 1,
@@ -103,7 +118,7 @@
     "_id": "Top-10-user-mentions",
     "_type": "visualization",
     "_source": {
-      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"user_mentions.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"user_mentions.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "description": "",
       "title": "Top 10 user mentions",
       "uiStateJSON": "{}",
@@ -146,7 +161,7 @@
       "title": "Weibo list",
       "version": 1,
       "kibanaSavedObjectMeta": {
-        "searchSourceJSON": "{\"index\": \"logstash-*\",\"query\": {\"query_string\": {\"analyze_wildcard\": true,\"query\": \"*\"}},\"filter\": [{\"meta\": {\"negate\": false,\"index\": \"logstash-*\",\"key\": \"_type\",\"value\": \"weibo\",\"disabled\": false,\"alias\": null},\"query\": {\"match\": {\"_type\": {\"query\": \"weibo\",\"type\": \"phrase\"}}},\"$state\": {\"store\": \"appState\"}}],\"highlight\": {\"pre_tags\": [\"@kibana-highlighted-field@\"],\"post_tags\": [\"@/kibana-highlighted-field@\"],\"fields\": {\"*\": {}},\"require_field_match\": false,\"fragment_size\": 2147483647}}"
+        "searchSourceJSON": "{\"index\": \"logstash-*\",\"query\": {\"query_string\": {\"analyze_wildcard\": true,\"query\": \"*\"}},\"filter\": [{\"meta\": {\"negate\": false,\"index\": \"logstash-*\",\"key\": \"_type\",\"value\": \"weibo\",\"disabled\": false,\"alias\": null},\"query\": {\"match_phrase\": {\"_type\": {\"query\": \"weibo\"}}},\"$state\": {\"store\": \"appState\"}}],\"highlight\": {\"pre_tags\": [\"@kibana-highlighted-field@\"],\"post_tags\": [\"@/kibana-highlighted-field@\"],\"fields\": {\"*\": {}},\"require_field_match\": false,\"fragment_size\": 2147483647}}"
       },
       "columns": [
         "screen_name",
@@ -173,7 +188,7 @@
     "_id": "Top-10-weiboers",
     "_type": "visualization",
     "_source": {
-      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"screen_name.raw\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"screen_name.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "description": "",
       "title": "Top 10 weiboers",
       "uiStateJSON": "{}",

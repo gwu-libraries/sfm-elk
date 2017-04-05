@@ -1,0 +1,23 @@
+# for configuration
+# See https://www.elastic.co/guide/en/elasticsearch/reference/current/settings.html
+network.host: 0.0.0.0
+
+# minimum_master_nodes need to be explicitly set when bound on a public IP
+# set to 1 to allow single node clusters
+# Details: https://github.com/elastic/elasticsearch/pull/17288
+discovery.zen.minimum_master_nodes: 1
+
+# disable X-Pack
+# see https://www.elastic.co/guide/en/x-pack/current/xpack-settings.html
+#   https://www.elastic.co/guide/en/x-pack/current/installing-xpack.html#xpack-enabling
+xpack.security.enabled: false
+xpack.graph.enabled: false
+xpack.watcher.enabled: false
+
+# config the search queue to 10000, aviod the shield fails
+# see https://www.elastic.co/guide/en/elasticsearch/reference/current/modules-threadpool.html
+thread_pool.search.queue_size: 10000
+
+# increse space for index
+# see https://www.elastic.co/guide/en/elasticsearch/reference/5.x/tune-for-indexing-speed.html#_indexing_buffer_size
+indices.memory.index_buffer_size: 30%
