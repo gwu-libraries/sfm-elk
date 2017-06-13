@@ -31,7 +31,7 @@ class ElkLoader(BaseConsumer):
             iter_type = "twitter_rest_warc_iter.py"
         elif harvest_type in ('twitter_sample', 'twitter_filter'):
             iter_type = "twitter_stream_warc_iter.py"
-        elif harvest_type == 'weibo_timeline':
+        elif harvest_type in ('weibo_timeline', 'weibo_search'):
             iter_type = "weibo_warc_iter.py"
             jq_cmd = "jq -c '{ sm_type: \"weibo\", id: .mid, user_id: .user.idstr, " \
                      "screen_name: .user.screen_name, created_at: .created_at, text: .text}'"
@@ -39,11 +39,11 @@ class ElkLoader(BaseConsumer):
             log.info("Skipping %s because there is not yet a warc iterator for harvest type %s", warc_filepath, harvest_type)
             return
         log.info("Loading %s", warc_filepath)
-        cmd = "{} {} | {} | /opt/logstash/bin/logstash -f stdin.conf".format(iter_type, warc_filepath, jq_cmd)
+        cmd = "{} {} | {} | /usr/share/logstash/bin/logstash -f stdin.conf".format(iter_type, warc_filepath, jq_cmd)
 
         try:
             check_output(cmd, shell=True)
-            log.debug("Loading %s completed.", warc_filepath)
+            log.info("Loading %s completed.", warc_filepath)
         except CalledProcessError, e:
             log.error("%s returned %s: %s", cmd, e.returncode, e.output)
 

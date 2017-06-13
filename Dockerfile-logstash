@@ -1,0 +1,53 @@
+# USING VERSION 5.3.0
+FROM  docker.elastic.co/logstash/logstash:5.3.0
+
+MAINTAINER Victor Tan <ychtan@email.gwu.edu>
+
+USER root
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt-get update && apt-get install -y \
+    python-dev \
+    libffi-dev \
+    libssl-dev \
+    python-pip \
+    git \
+    wget
+
+# grab gosu for easy step-down from root
+ENV GOSU_VERSION 1.10
+RUN set -x \
+	&& apt-get update && apt-get install -y --no-install-recommends ca-certificates wget && rm -rf /var/lib/apt/lists/* \
+	&& wget -O /usr/local/bin/gosu "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture)" \
+	&& wget -O /usr/local/bin/gosu.asc "https://github.com/tianon/gosu/releases/download/$GOSU_VERSION/gosu-$(dpkg --print-architecture).asc" \
+	&& export GNUPGHOME="$(mktemp -d)" \
+	&& gpg --keyserver hkp://p80.pool.sks-keyservers.net:80 --recv-keys B42F6819007F00F88E364FD4036A9C25BF357DD4 \
+	&& gpg --batch --verify /usr/local/bin/gosu.asc /usr/local/bin/gosu \
+	&& rm -r "$GNUPGHOME" /usr/local/bin/gosu.asc \
+	&& chmod +x /usr/local/bin/gosu \
+	&& gosu nobody true
+
+#Need newer version of jq
+WORKDIR /usr/bin
+RUN wget https://github.com/stedolan/jq/releases/download/jq-1.5/jq-linux64 && mv jq-linux64 jq && chmod +x jq
+RUN pip install --upgrade pip==9.0.1
+#Avoid the warning of https
+RUN pip install --upgrade ndg-httpsclient
+RUN pip install appdeps
+ENV SFM_REQS release
+ENV DEBUG false
+ADD https://raw.githubusercontent.com/gwu-libraries/sfm-utils/master/docker/base/setup_reqs.sh /opt/sfm-setup/
+RUN chmod +x /opt/sfm-setup/setup_reqs.sh
+
+# custom logstash config
+COPY docker/logstash/logstash.yml /usr/share/logstash/config/
+RUN chown logstash:logstash /usr/share/logstash/config/logstash.yml
+
+# add start bash for logstash
+ADD docker/logstash/start.sh /usr/local/bin/sfm_logstash_start.sh
+RUN chmod +x /usr/local/bin/sfm_logstash_start.sh
+
+ADD . /opt/sfm-elk/
+WORKDIR /opt/sfm-elk
+RUN pip install -r requirements/common.txt -r requirements/release.txt
+
+ENTRYPOINT ["/usr/local/bin/sfm_logstash_start.sh"]

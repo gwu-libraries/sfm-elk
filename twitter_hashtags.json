@@ -3,11 +3,13 @@
   "order": 1,
   "settings": {
     "index": {
+      "refresh_interval":"30s",
       "analysis": {
         "analyzer": {
           "analyzer_keyword": {
-            "tokenizer": "keyword",
-            "filter": "uppercase"
+            "type":         "custom",
+            "tokenizer":    "keyword",
+            "filter":       "lowercase"
           }
         }
       }
@@ -17,18 +19,17 @@
     "twitter": {
       "properties": {
         "hashtags": {
-          "type": "string",
-          "index" : "analyzed",
+          "type": "text",
+          "index" : true,
           "analyzer": "analyzer_keyword",
           "fields" : {
-             "raw" : {
-                 "index" : "not_analyzed",
-                 "type" : "string"
+             "keyword" : {
+                 "index" : true,
+                 "type" : "keyword"
              }
           }
         }
       }
-    },
-    "aliases": {}
+    }
   }
 }
