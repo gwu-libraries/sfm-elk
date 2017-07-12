@@ -136,7 +136,7 @@
       "title": "Weibo",
       "hits": 0,
       "description": "",
-      "panelsJSON": "[{\"id\":\"Top-10-weiboers\",\"type\":\"visualization\",\"panelIndex\":2,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":7},{\"id\":\"Weibo-rate\",\"type\":\"visualization\",\"panelIndex\":5,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"Weibo-list\",\"type\":\"search\",\"panelIndex\":6,\"size_x\":8,\"size_y\":3,\"col\":5,\"row\":1,\"columns\":[\"screen_name\",\"text\"],\"sort\":[\"@timestamp\",\"desc\"]}]",
+      "panelsJSON": "[{\"id\":\"Top-10-topics\",\"type\":\"visualization\",\"panelIndex\":1,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":4},{\"id\":\"Top-10-weiboers\",\"type\":\"visualization\",\"panelIndex\":2,\"size_x\":4,\"size_y\":3,\"col\":5,\"row\":7},{\"id\":\"Top-10-weibo-urls\",\"type\":\"visualization\",\"panelIndex\":3,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":4},{\"id\":\"Top-10-weibo-user-mentions\",\"type\":\"visualization\",\"panelIndex\":4,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":7},{\"id\":\"Weibo-rate\",\"type\":\"visualization\",\"panelIndex\":5,\"size_x\":4,\"size_y\":3,\"col\":1,\"row\":1},{\"id\":\"Weibo-list\",\"type\":\"search\",\"panelIndex\":6,\"size_x\":8,\"size_y\":3,\"col\":5,\"row\":1,\"columns\":[\"screen_name\",\"text\"],\"sort\":[\"@timestamp\",\"desc\"]},{\"id\":\"Top-10-weiboer-location\",\"type\":\"visualization\",\"panelIndex\":8,\"size_x\":6,\"size_y\":3,\"col\":1,\"row\":10},{\"id\":\"Top-10-topics-cloud\",\"type\":\"visualization\",\"panelIndex\":7,\"size_x\":4,\"size_y\":5,\"col\":9,\"row\":4}]",
       "optionsJSON": "{\"darkTheme\":false}",
       "uiStateJSON": "{}",
       "version": 1,
@@ -169,7 +169,70 @@
       ]
     }
   },
-    {
+  {
+    "_id": "Top-10-weibo-urls",
+    "_type": "visualization",
+    "_source": {
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"urls.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "title": "Top 10 weibo urls",
+      "uiStateJSON": "{}",
+      "savedSearchId": "Weibo-list",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\": []}"
+      }
+    }
+  },
+
+  {
+    "_id": "Top-10-weibo-user-mentions",
+    "_type": "visualization",
+    "_source": {
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"user_mentions.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "title": "Top 10 weibo user mentions",
+      "uiStateJSON": "{}",
+      "savedSearchId": "Weibo-list",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\": []}"
+      }
+    }
+  },
+
+  {
+    "_id": "Top-10-topics",
+    "_type": "visualization",
+    "_source": {
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"topics.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "title": "Top 10 topics",
+      "uiStateJSON": "{}",
+      "savedSearchId": "Weibo-list",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\": []}"
+      }
+    }
+  },
+  {
+    "_id": "Top-10-topics-cloud",
+    "_type": "visualization",
+    "_source": {
+      "visState": "{\"type\":\"tagcloud\",\"params\":{\"scale\":\"log\",\"orientation\":\"multiple\",\"minFontSize\":16,\"maxFontSize\": 60},\"aggs\":[{\"id\":\"1\",\"enabled\": true,\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"enabled\": true,\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"topics.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "title": "Top 10 topics cloud",
+      "uiStateJSON": "{}",
+      "savedSearchId": "Weibo-list",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\": []}"
+      }
+    }
+  },
+
+  {
     "_id": "Weibo-rate",
     "_type": "visualization",
     "_source": {
@@ -184,13 +247,28 @@
       }
     }
   },
-    {
+  {
     "_id": "Top-10-weiboers",
     "_type": "visualization",
     "_source": {
       "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"screen_name.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
       "description": "",
       "title": "Top 10 weiboers",
+      "uiStateJSON": "{}",
+      "savedSearchId": "Weibo-list",
+      "version": 1,
+      "kibanaSavedObjectMeta": {
+        "searchSourceJSON": "{\"filter\": []}"
+      }
+    }
+  },
+  {
+    "_id": "Top-10-weiboer-location",
+    "_type": "visualization",
+    "_source": {
+      "visState": "{\"type\":\"histogram\",\"params\":{\"shareYAxis\":true,\"addTooltip\":true,\"addLegend\":true,\"scale\":\"linear\",\"mode\":\"stacked\",\"times\":[],\"addTimeMarker\":false,\"defaultYExtents\":false,\"setYExtents\":false,\"yAxis\":{}},\"aggs\":[{\"id\":\"1\",\"type\":\"count\",\"schema\":\"metric\",\"params\":{}},{\"id\":\"2\",\"type\":\"terms\",\"schema\":\"segment\",\"params\":{\"field\":\"location.keyword\",\"size\":10,\"order\":\"desc\",\"orderBy\":\"1\"}}],\"listeners\":{}}",
+      "description": "",
+      "title": "Top 10 weiboer location",
       "uiStateJSON": "{}",
       "savedSearchId": "Weibo-list",
       "version": 1,

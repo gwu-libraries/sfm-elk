@@ -30,9 +30,8 @@ fi
 # STEP-5 Initial elasticsearch setting
 cd /opt/sfm-elk
 python elk_config_loader.py
-# for unknown reason, sometime, the first time initial seems not work well.
-sleep 3
-python elk_config_loader.py
+# for kibana field error, refresh the field list on kibana UI
+# ref https://github.com/elastic/kibana/issues/9571#issuecomment-304896282
 
 # Go back to kibana home
 cd /usr/share/kibana
