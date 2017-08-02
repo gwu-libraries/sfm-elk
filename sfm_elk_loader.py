@@ -22,23 +22,18 @@ class ElkLoader(BaseConsumer):
             log.info("Skipping %s because it is from a different collection set", warc_filepath)
             return
         harvest_type = self.message["harvest"]["type"]
-        jq_cmd = "| jq -c '{ sm_type: \"tweet\", id: .id, user_id: .user.id_str, screen_name: .user.screen_name, " \
-                 "created_at: .created_at, text: (.extended_tweet.full_text // .full_text // .text), " \
-                 "user_mentions: [(.extended_tweet.entities // .entities).user_mentions[]?.screen_name], " \
-                 "hashtags: [(.extended_tweet.entities // .entities).hashtags[]?.text], " \
-                 "urls: [(.extended_tweet.entities // .entities).urls[]?.expanded_url]}'"
         if harvest_type in ('twitter_search', 'twitter_user_timeline'):
-            iter_type = "twitter_rest_warc_iter.py"
+            iter_type = "twitter_rest_warc_iter.py --elkwarc=true"
         elif harvest_type in ('twitter_sample', 'twitter_filter'):
-            iter_type = "twitter_stream_warc_iter.py"
+            iter_type = "twitter_stream_warc_iter.py --elkwarc=true"
         elif harvest_type in ('weibo_timeline', 'weibo_search'):
             iter_type = "weibo_warc_iter.py --elkwarc=true"
-            jq_cmd = ""
         else:
-            log.info("Skipping %s because there is not yet a warc iterator for harvest type %s", warc_filepath, harvest_type)
+            log.info("Skipping %s because there is not yet a warc iterator for harvest type %s", warc_filepath,
+                     harvest_type)
             return
         log.info("Loading %s", warc_filepath)
-        cmd = "{} {} {} | /usr/share/logstash/bin/logstash -f stdin.conf".format(iter_type, warc_filepath, jq_cmd)
+        cmd = "{} {} | /usr/share/logstash/bin/logstash -f stdin.conf".format(iter_type, warc_filepath)
 
         try:
             check_output(cmd, shell=True)
