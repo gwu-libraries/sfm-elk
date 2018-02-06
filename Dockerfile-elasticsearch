@@ -1,4 +1,4 @@
-# USING VERSION 5.3.0
+# USING VERSION 5.3.3
 FROM docker.elastic.co/elasticsearch/elasticsearch:5.3.3
 
 MAINTAINER Victor Tan <ychtan@email.gwu.edu>
